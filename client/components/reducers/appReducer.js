@@ -1,6 +1,5 @@
 import * as type from '../constants/actions';
 import * as queries from '../queries/queries';
-console.log(queries.addUser)
 
 const initState = {
   userName: '',
@@ -12,7 +11,8 @@ const appReducer = (state = initState, action) => {
     case type.UpdateUserMessages:
       let updateUserMessagesState = Object.assign({}, state);
       updateUserMessagesState.userName = action.userName;
-      updateUserMessagesState.userMessages.push(action.message)
+      updateUserMessagesState.userMessages.push(action.message);
+      console.log('state', updateUserMessagesState)
     return updateUserMessagesState;
 
     default:
