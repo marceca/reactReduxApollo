@@ -1,4 +1,6 @@
 import * as type from '../constants/actions';
+import * as queries from '../queries/queries';
+console.log(queries.addUser)
 
 const initState = {
   userName: '',

@@ -339,6 +339,10 @@ exports.classMethodOrDeclareMethodCommon = classMethodOrDeclareMethodCommon;
     },
     quasi: {
       validate: (0, _utils.assertNodeType)("TemplateLiteral")
+    },
+    typeParameters: {
+      validate: (0, _utils.assertNodeType)("TypeParameterInstantiation", "TSTypeParameterInstantiation"),
+      optional: true
     }
   }
 });

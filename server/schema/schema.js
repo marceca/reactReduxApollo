@@ -1,5 +1,6 @@
 const graphql = require('graphql');
-const User = require('../models/useModels');
+const User = require('../models/userModels');
+const Message = require('../models/messageModel');
 
 const {
   GraphQLObjectType,
@@ -16,8 +17,15 @@ const UserType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLID },
     userName: { type: GraphQLString },
-    userPass: { type: GraphQLString },
-    userMessages: { type: GraphQLString }
+    userPass: { type: GraphQLString }
+  })
+})
+
+const MessageType = new GraphQLObjectType({
+  name: 'Message',
+  fields: () => ({
+    id: { type: GraphQLID },
+    message: { type: GraphQLString }
   })
 })
 
@@ -50,6 +58,20 @@ const Mutation = new GraphQLObjectType({
           userPass: args.password
         });
         return newUser.save();
+      }
+    },
+    addMessage: {
+      type: MessageType,
+      args: {
+        userId: { type: new GraphQLNonNull(GraphQLID)},
+        message: { type: new GraphQLNonNull(GraphQLString)}
+      },
+      resolve(parents, args) {
+        let newMessage = new Message({
+          userId: args.userId,
+          message: args.message
+        })
+        return newMessage.save();
       }
     }
   }
