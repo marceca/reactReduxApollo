@@ -37,7 +37,13 @@ const RootQuery = new GraphQLObjectType({
       type: UserType,
       args: {id: { type: GraphQLID }},
       resolve(parent, args) {
-        return User.findById(args.id)
+        return User.findById(args.id);
+      }
+    },
+    getUsers: {
+      type: new GraphQLList(UserType),
+      resolve(parent, args) {
+        return User.find();
       }
     }
   }
@@ -77,7 +83,19 @@ const Mutation = new GraphQLObjectType({
   }
 })
 
+const Subscribe = new GraphQLObjectType({
+  name: 'Subscribe',
+  fields: {
+    type: UserType,
+    args: {
+      name: {  type: new GraphQLNonNull(GraphQLString)},
+      password: {  type: new GraphQLNonNull(GraphQLString)}
+    }
+  }
+})
+
 module.exports = new GraphQLSchema({
   query: RootQuery,
-  mutation: Mutation
+  mutation: Mutation,
+  subscription: Subscribe
 })

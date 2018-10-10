@@ -4,10 +4,7 @@ import store from './store';
 import ReactDOM from 'react-dom';
 import App from './components/app';
 
-// Apollo 1.4.6
-import { ApolloProvider, createNetworkInterface } from 'react-apollo';
-
-// Apollo 2.2.4
+import { ApolloProvider } from 'react-apollo';
 import { ApolloClient } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
